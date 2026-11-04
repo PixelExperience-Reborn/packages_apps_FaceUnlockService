@@ -1,0 +1,19 @@
+name: Android 17 FaceUnlock historical security inventory
+
+on:
+  push:
+    branches:
+      - audit/a17-mondrian-faceunlock-20261104
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  historical-risk-inventory:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify old privileged face service components and blockers
+        run: python3 tools/verify_a17_faceunlock_legacy.py
